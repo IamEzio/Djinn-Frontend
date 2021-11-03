@@ -32,7 +32,7 @@
               >
               <router-link to="/cart" class="button is-success">
                 <!-- <span class="icon"><i class="fas fa-shopping-cart"></i></span> -->
-                <span>Cart</span>
+                <span>Cart ({{ cartTotalLength }})</span>
               </router-link>
             </div>
           </div>
@@ -53,7 +53,28 @@ export default {
   data() {
     return {
       showMobileMenu: false,
+      cart: {
+        items: [],
+      },
     };
+  },
+  computed: {
+    cartTotalLength() {
+      let totalLength = 0;
+      for (let i = 0; i < this.cart.items.length; i++) {
+        totalLength += this.cart.items[i].quantity;
+      }
+      // if (this.cart.items.length) {
+      //   console.log(this.cart.items[0].quantity);
+      // }
+      return totalLength;
+    },
+  },
+  beforeCreate() {
+    this.$store.commit("initializeStore");
+  },
+  mounted() {
+    this.cart = this.$store.state.cart;
   },
 };
 </script>
