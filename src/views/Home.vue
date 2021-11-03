@@ -50,9 +50,11 @@ export default {
   components: {},
   mounted() {
     this.getLatestProducts();
+    document.title = "Home | Djinn";
   },
   methods: {
     getLatestProducts() {
+      this.$store.commit("setIsLoading", true);
       axios
         .get("/api/v1/latest-products/")
         .then((response) => {
@@ -61,6 +63,8 @@ export default {
         .catch((error) => {
           console.log(error);
         });
+
+      this.$store.commit("setIsLoading", false);
     },
   },
 };
