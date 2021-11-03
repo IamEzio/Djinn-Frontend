@@ -1,4 +1,4 @@
-# emart_vue
+# DJINN-EMART Frontend
 
 ## Project setup
 ```
