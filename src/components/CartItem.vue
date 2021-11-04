@@ -1,0 +1,68 @@
+<template>
+  <tr>
+    <td>
+      <router-link :to="item.product.get_absolute_url">{{
+        item.product.name
+      }}</router-link>
+    </td>
+    <td>{{ item.product.price }}</td>
+    <td>
+      {{ item.quantity }}
+      <a
+        @click="DecrementQuantity(item)"
+        class="button is-small is-rounded is-danger is-light"
+      >
+        <b>-</b></a
+      >
+      <a
+        @click="IncrementQuantity(item)"
+        class="button is-small is-rounded is-success is-light"
+      >
+        <b>+</b></a
+      >
+    </td>
+    <td>{{ getItemTotal(item).toFixed(2) }}</td>
+    <td>
+      <button class="delete is-medium" @click="removeFromCart(item)"></button>
+    </td>
+  </tr>
+</template>
+
+<script>
+export default {
+  name: "CartItem",
+  props: {
+    initialItem: Object,
+  },
+  data() {
+    return {
+      item: this.initialItem,
+    };
+  },
+  methods: {
+    getItemTotal(item) {
+      return item.quantity * item.product.price;
+    },
+    DecrementQuantity(item) {
+      item.quantity -= 1;
+      if (item.quantity === 0) {
+        this.$emit("removeFromCart", item);
+      }
+      this.updateCart();
+    },
+    IncrementQuantity(item) {
+      item.quantity += 1;
+      this.updateCart();
+    },
+    updateCart() {
+      localStorage.setItem("cart", JSON.stringify(this.$store.state.cart));
+    },
+    removeFromCart(item) {
+      this.$emit("removeFromCart", item);
+      this.updateCart();
+    },
+  },
+};
+</script>
+
+<style lang="scss" scoped></style>
