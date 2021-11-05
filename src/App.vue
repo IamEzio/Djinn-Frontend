@@ -81,6 +81,7 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   data() {
     return {
@@ -96,14 +97,18 @@ export default {
       for (let i = 0; i < this.cart.items.length; i++) {
         totalLength += this.cart.items[i].quantity;
       }
-      // if (this.cart.items.length) {
-      //   console.log(this.cart.items[0].quantity);
-      // }
       return totalLength;
     },
   },
   beforeCreate() {
     this.$store.commit("initializeStore");
+
+    const token = this.$store.state.token;
+    if (token) {
+      axios.defaults.headers.common["Authorization"] = "Token " + token;
+    } else {
+      axios.defaults.headers.common["Authorization"] = "";
+    }
   },
   mounted() {
     this.cart = this.$store.state.cart;
