@@ -144,7 +144,7 @@ export default {
 
     if (this.cartTotalLength > 0) {
       this.stripe = Stripe(
-        "pk_test_51H1HiuKBJV2qfWbD2gQe6aqanfw6Eyul5PO2KeOuSRlUMuaV4TxEtaQyzr9DbLITSZweL7XjK3p74swcGYrE2qEX00Hz7GmhMI"
+        "pk_test_51JsSdySHvsWBYmKLMAqnJlzlyJkVkHGhGkbsk3LoLofX0hJhH04Hbs5eQCgKQVkTSAQEN9PbQIyB9hff6sTmfOHI00mdpBHEfp"
       );
       const elements = this.stripe.elements();
       this.card = elements.create("card", { hidePostalCode: true });

@@ -14,7 +14,7 @@
       <div class="column is-12">
         <h2 class="subtitle">My orders</h2>
 
-        <OrderSummary
+        <order-summary
           v-for="order in orders"
           v-bind:key="order.id"
           v-bind:order="order"
@@ -26,7 +26,7 @@
 
 <script>
 import axios from "axios";
-import OrderSummary from "@/components/OrderSummary.vue";
+import OrderSummary from "../components/OrderSummary.vue";
 export default {
   name: "MyAccount",
   components: {
